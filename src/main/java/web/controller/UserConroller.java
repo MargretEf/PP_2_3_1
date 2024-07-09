@@ -8,10 +8,14 @@ import web.models.User;
 import web.service.UserService;
 @Controller
 public class UserConroller {
-    @Autowired
-    private UserService userServiceImp;
 
-@GetMapping("/")
+    private UserService userServiceImp;
+    @Autowired
+    public UserConroller(UserService userServiceImp) {
+        this.userServiceImp = userServiceImp;
+    }
+
+    @GetMapping("/")
     public String showAllUsers(Model model) {
     model.addAttribute("users", userServiceImp.getAllUsers());
     return "users";

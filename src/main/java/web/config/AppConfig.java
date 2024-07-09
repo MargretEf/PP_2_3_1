@@ -42,8 +42,6 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        // em.setPackagesToScan("web");
-        //А может и это
         em.setPackagesToScan(env.getProperty("db.entity.package"));
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
        em.setJpaProperties(getHibernateProperties());
@@ -59,7 +57,7 @@ public class AppConfig {
 
 public Properties getHibernateProperties() {
       Properties props = new Properties();
-   InputStream is = this.getClass().getClassLoader().getResourceAsStream("hibernate.properties");
+   InputStream is = this.getClass().getClassLoader().getResourceAsStream("db.properties");
     try {
         props.load(is);
     } catch (IOException e) {
